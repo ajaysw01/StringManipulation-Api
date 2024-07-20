@@ -5,6 +5,11 @@ import com.aj.model.JsonModel;
 import com.aj.repository.JsonModelRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "JSON Manipulation", description = "APIs for manipulating and retrieving JSON data")
 public class JsonController {
 
     private static final Logger logger = LoggerFactory.getLogger(JsonController.class);
@@ -25,6 +31,9 @@ public class JsonController {
     private JsonModelRepository jsonModelRepository;
 
     @PostMapping("/manipulate")
+    @Operation(summary = "Manipulate JSON", description = "Manipulate JSON based on input and store the result")
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @ApiResponse(responseCode = "500", description = "Error processing JSON")
     public ResponseEntity<Map<String, Object>> manipulateJson(@RequestParam String input) {
         try {
 
@@ -44,6 +53,9 @@ public class JsonController {
     }
 
     @GetMapping("/list")
+    @Operation(summary = "List JSON models", description = "Retrieve all stored JSON models")
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @ApiResponse(responseCode = "500", description = "Error retrieving JSON models")
     public ResponseEntity<List<JsonEntity>> listJsonModels() {
         try {
 

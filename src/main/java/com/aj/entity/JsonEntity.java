@@ -1,5 +1,6 @@
 package com.aj.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Entity representing a JSON model")
 public class JsonEntity {
 
     public JsonEntity(String modifiedJson) {
@@ -21,8 +23,10 @@ public class JsonEntity {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Unique identifier of the JSON Entity")
     private Long id;
 
     @Column(columnDefinition = "TEXT")
+    @Schema(description = "JSON content")
     private String jsonModel;
 }
